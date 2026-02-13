@@ -1,0 +1,605 @@
+/**
+ * Genshin Impact Inspired SRE Dashboard
+ * Theme: Fantasy Adventure meets DevOps Engineering
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --genshin-gold: #FFD780;
+    --genshin-gold-muted: #D9C28D;
+    --genshin-off-white: #FFF9F0;
+    --genshin-blue-celestial: #EFF5FF;
+    --genshin-dark: #3B4254;
+    --genshin-border: #E3D9C6;
+
+    /* Elemental Colors */
+    --anemo-green: #6EC4B3;
+    --geo-gold: #EDB14C;
+    --hydro-blue: #4F91BD;
+    --pyro-orange: #E86B48;
+    --electro-purple: #B08FC0;
+    --cryo-cyan: #96D1E3;
+
+    /* Card Styles */
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --artifact-border: #DBCDB5;
+    --artifact-bg-gradient: linear-gradient(180deg, #F2EDE4 0%, #E6DFD4 100%);
+
+    /* Fonts */
+    --font-fancy: 'Cinzel', serif;
+    /* Placeholder for Genshin font */
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--genshin-off-white);
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(239, 245, 255, 0.8) 0%, transparent 100%),
+        url('https://www.transparenttextures.com/patterns/pinstriped-suit.pattern');
+    /* Subtle texture */
+    font-family: var(--font-sans);
+    color: var(--genshin-dark);
+    min-height: 100vh;
+    padding: 2rem;
+    overflow-x: hidden;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* BACKGROUND DECORATIONS */
+/* ───────────────────────────────────────────────────────────────── */
+
+.floating-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background-image: radial-gradient(circle at 2px 2px, rgba(237, 177, 76, 0.1) 1px, transparent 0);
+    background-size: 40px 40px;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* LAYOUT */
+/* ───────────────────────────────────────────────────────────────── */
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* HEADER & STATUS BAR */
+/* ───────────────────────────────────────────────────────────────── */
+
+.top-status-bar {
+    grid-column: span 12;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(59, 66, 84, 0.9);
+    border-radius: 40px;
+    padding: 0.5rem 1.5rem;
+    color: var(--genshin-gold);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--genshin-gold-muted);
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title-group h1 {
+    font-family: var(--font-fancy);
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+}
+
+.mascot {
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(0 0 5px var(--genshin-gold));
+    animation: float-slow 3s ease-in-out infinite;
+}
+
+.status-badges {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.adventure-rank {
+    background: var(--genshin-gold);
+    color: var(--genshin-dark);
+    padding: 2px 12px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* CHARACTER PANEL */
+/* ───────────────────────────────────────────────────────────────── */
+
+.character-panel {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.portrait-frame {
+    position: relative;
+    background: var(--artifact-bg-gradient);
+    border: 4px solid var(--genshin-border);
+    border-radius: 20px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.portrait-frame img {
+    width: 100%;
+    border-radius: 12px;
+    display: block;
+}
+
+.vision-gem {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle at 30% 30%, #fff, var(--cryo-cyan));
+    border: 3px solid var(--genshin-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--cryo-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.nameplate {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.nameplate h2 {
+    font-family: var(--font-fancy);
+    font-size: 1.75rem;
+    color: var(--genshin-dark);
+}
+
+.nameplate .title {
+    font-size: 0.8rem;
+    color: var(--genshin-gold-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* STAT CARDS (ARTIFACT STYLE) */
+/* ───────────────────────────────────────────────────────────────── */
+
+.stats-panel {
+    grid-column: span 8;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.artifact-card {
+    background: var(--artifact-bg-gradient);
+    border: 2px solid var(--artifact-border);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.artifact-card::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    background: rgba(189, 110, 80, 0.1);
+    /* Subtle star or emblem */
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg>') no-repeat center;
+}
+
+.artifact-icon {
+    width: 60px;
+    height: 60px;
+    background: #D9D2C5;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #4A4A4A;
+}
+
+.artifact-data {
+    flex: 1;
+}
+
+.artifact-label {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #8C8276;
+    text-transform: uppercase;
+}
+
+.artifact-value {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #4A4A4A;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* ELEMENTAL PIPELINE */
+/* ───────────────────────────────────────────────────────────────── */
+
+.pipeline-panel {
+    grid-column: span 12;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid var(--genshin-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.pipeline-header {
+    font-family: var(--font-fancy);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: var(--genshin-gold-muted);
+}
+
+.elements-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.element-pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 22%;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s;
+}
+
+.element-pillar:hover {
+    transform: translateY(-5px);
+}
+
+.element-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 0 20px currentColor;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.pillar-name {
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+
+.pillar-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.tool-tag {
+    background: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border: 1px solid var(--genshin-border);
+    color: var(--genshin-dark);
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* QUEST LOG / LIVE FEED */
+/* ───────────────────────────────────────────────────────────────── */
+
+.quest-log-panel {
+    grid-column: span 6;
+    background: #F2E9D4;
+    /* Parchment color */
+    border: 4px solid #DBCDB5;
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.quest-log-header {
+    font-family: var(--font-fancy);
+    border-bottom: 2px solid #DBCDB5;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.log-content {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.log-entry {
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.25rem;
+}
+
+.log-entry::before {
+    content: '◈';
+    position: absolute;
+    left: 0;
+    color: #8C8276;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* TALENTS / SKILLS */
+/* ───────────────────────────────────────────────────────────────── */
+
+.talents-panel {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.talent-group h3 {
+    font-family: var(--font-fancy);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--genshin-gold);
+    padding-bottom: 0.5rem;
+}
+
+.talent-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.talent-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--genshin-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--genshin-gold);
+}
+
+.talent-info {
+    flex: 1;
+}
+
+.talent-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.elemental-gauge {
+    height: 8px;
+    background: #E0E0E0;
+    border-radius: 10px;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.gauge-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--genshin-gold), var(--genshin-gold-muted));
+    border-radius: 10px;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* CONSTELLATION */
+/* ───────────────────────────────────────────────────────────────── */
+
+.constellation-panel {
+    grid-column: span 6;
+    background: rgba(59, 66, 84, 0.05);
+    border-radius: 20px;
+    border: 2px dashed var(--genshin-border);
+    padding: 1.5rem;
+    position: relative;
+}
+
+.constellation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    justify-items: center;
+}
+
+.const-star {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--genshin-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.const-star.locked {
+    opacity: 0.3;
+}
+
+.const-star.active {
+    background: rgba(237, 177, 76, 0.2);
+    border-color: var(--genshin-gold);
+    box-shadow: 0 0 15px var(--genshin-gold);
+}
+
+.const-star i {
+    font-size: 1.25rem;
+    color: var(--genshin-dark);
+}
+
+.const-star.active i {
+    color: #E86B48;
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* FOOTER (CRAFTING BENCH) */
+/* ───────────────────────────────────────────────────────────────── */
+
+.main-footer {
+    grid-column: span 12;
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 2px solid var(--artifact-border);
+    margin-top: 3rem;
+}
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.footer-icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--genshin-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background: var(--genshin-dark);
+    color: var(--genshin-gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.footer-icon-link:hover .icon-box {
+    transform: scale(1.1);
+    background: var(--genshin-gold);
+    color: var(--genshin-dark);
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* ANIMATIONS */
+/* ───────────────────────────────────────────────────────────────── */
+
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes swirl-fire {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+.chaos-pulse {
+    animation: swirl-fire 4s infinite linear;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+
+    .character-panel,
+    .stats-panel,
+    .quest-log-panel,
+    .constellation-panel {
+        grid-column: span 12;
+    }
+
+    .talents-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .elements-row {
+        flex-wrap: wrap;
+    }
+
+    .element-pillar {
+        width: 45%;
+    }
+}

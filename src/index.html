@@ -1,0 +1,2470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarra Mehrez | Incident Command Center</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f8fbff;
+            --bg-secondary: #ffffff;
+            --bg-card: #f0f4f9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+
+            /* Blue Themed Palette */
+            --accent-blue: #3b82f6;
+            --accent-sky: #60a5fa;
+            --accent-cyan: #22d3ee;
+            --accent-teal: #14b8a6;
+            --accent-indigo: #6366f1;
+
+            --border-light: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.04);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        /* --- SOPHISTICATED UI ANIMATIONS --- */
+
+        /* Glass Shimmer Effect for Cards */
+        .dashboard-card,
+        .stat-card,
+        .project-card,
+        .activity-log,
+        .achievements,
+        .freelance-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::after,
+        .stat-card::after,
+        .project-card::after,
+        .freelance-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 10%,
+                    rgba(255, 255, 255, 0.1) 20%,
+                    rgba(255, 255, 255, 0.2) 30%,
+                    transparent 40%);
+            transform: rotate(45deg);
+            transition: 0.8s;
+            pointer-events: none;
+        }
+
+        .dashboard-card:hover::after,
+        .stat-card:hover::after,
+        .project-card:hover::after,
+        .freelance-card:hover::after {
+            left: 100%;
+            top: 100%;
+        }
+
+        /* Typing Effect for Tagline */
+        .tagline span {
+            border-right: 2px solid var(--accent-blue);
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--accent-blue)
+            }
+        }
+
+        /* Active Glow Pulse for Live System */
+        .live-badge {
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+            }
+        }
+
+        /* Progress Bar Animation for Pipeline */
+        .pipeline-stages::before {
+            background: linear-gradient(90deg,
+                    var(--accent-cyan) 0%,
+                    var(--accent-blue) 50%,
+                    var(--accent-indigo) 100%);
+            background-size: 200% 100%;
+            animation: gradient-slide 3s linear infinite;
+        }
+
+        @keyframes gradient-slide {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* Pipeline Runner Animal */
+        .pipeline-container {
+            position: relative;
+        }
+
+        .pipeline-runner {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            font-size: 1.5rem;
+            z-index: 10;
+            pointer-events: none;
+            animation: move-through-pipeline 12s linear infinite;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+        }
+
+        @keyframes move-through-pipeline {
+            0% {
+                left: 5%;
+                transform: scaleX(1);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            20% {
+                left: 25%;
+                transform: scaleX(1);
+            }
+
+            45% {
+                left: 50%;
+                transform: scaleX(1);
+            }
+
+            70% {
+                left: 75%;
+                transform: scaleX(1);
+            }
+
+            95% {
+                left: 95%;
+                opacity: 1;
+                transform: scaleX(1);
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+                transform: scaleX(1);
+            }
+        }
+
+        /* Peeking Cat Mascot - Bigger & Better */
+        .peeking-cat {
+            position: fixed;
+            bottom: -90px;
+            right: 50px;
+            width: 120px;
+            height: auto;
+            z-index: 9999;
+            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), bottom 0.6s ease;
+            pointer-events: auto;
+            filter: drop-shadow(0 -10px 20px rgba(0, 0, 0, 0.1));
+        }
+
+        .peeking-cat.active {
+            bottom: -15px;
+            animation: cat-wag 3s ease-in-out infinite;
+        }
+
+        @keyframes cat-wag {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+
+        .peeking-cat:hover {
+            transform: scale(1.2) translateY(-20px) rotate(-5deg) !important;
+        }
+
+        /* Fixed Freelance Section */
+        .freelance-card {
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid var(--accent-blue);
+            margin: 3rem 0;
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.05);
+        }
+
+        .freelance-card h2 {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-blue);
+        }
+
+        .freelance-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .contact-modal {
+            background: var(--bg-secondary);
+            padding: 2.5rem;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .contact-modal {
+            transform: translateY(0);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            background: var(--bg-card);
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .submit-status {
+            display: none;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Cursor Trail Effect - Antigravity Style */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: screen;
+            animation: cursorFade 0.8s ease-out forwards;
+        }
+
+        @keyframes cursorFade {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Hover Effects */
+        .btn,
+        .stat-card,
+        .metric-box,
+        .skill-pill {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before,
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before,
+        .stat-card:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Projects Section Styles */
+        .projects {
+            padding: 5rem 0;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, #f0f4f9 100%);
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.15);
+            border-color: var(--accent-blue);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: float-slow 3s ease-in-out infinite;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            background: var(--bg-card);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .project-tag:hover {
+            background: var(--accent-blue);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            gap: 0.8rem;
+            color: var(--accent-indigo);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Floating Geometric Shapes Background */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.05;
+            animation: float-shape 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 50%;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-sky));
+            border-radius: 30%;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+            border-radius: 20%;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-sky), var(--accent-blue));
+            border-radius: 50%;
+            top: 40%;
+            right: 30%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float-shape {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translate(30px, -30px) rotate(90deg) scale(1.1);
+            }
+
+            50% {
+                transform: translate(-20px, 20px) rotate(180deg) scale(0.9);
+            }
+
+            75% {
+                transform: translate(40px, 10px) rotate(270deg) scale(1.05);
+            }
+        }
+
+        /* Staggered Fade-In Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .stagger-1 {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            animation-delay: 0.3s;
+        }
+
+        .stagger-4 {
+            animation-delay: 0.4s;
+        }
+
+        .stagger-5 {
+            animation-delay: 0.5s;
+        }
+
+        .stagger-6 {
+            animation-delay: 0.6s;
+        }
+
+        /* Animated Skill Pills */
+        .skill-pill {
+            animation: skillPillPop 0.5s ease-out backwards;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .skill-pill:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            color: white;
+            border-color: transparent;
+        }
+
+        @keyframes skillPillPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Pulsing Status Badges */
+        .status-badge {
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+            }
+        }
+
+        /* Scroll Reveal Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animated Section Titles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+            animation: titleUnderline 1s ease-out forwards;
+        }
+
+        @keyframes titleUnderline {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Metric Box Number Animation */
+        .metric-value {
+            animation: numberPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+        }
+
+        @keyframes numberPop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Nav Link Hover Glow */
+        .nav-links a {
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            transform: translateY(-5px);
+        }
+
+        /* --- NEW: HIGH-TECH ANIMATIONS --- */
+
+        /* Scanning Scanline Effect */
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: scanline 3s infinite linear;
+        }
+
+        @keyframes scanline {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Pipeline Runner Glow */
+        .pipeline-runner {
+            text-shadow: 0 0 15px var(--accent-blue);
+            filter: drop-shadow(0 0 5px var(--accent-blue));
+            transition: all 0.3s ease;
+        }
+
+        /* Project Card Glow on Hover */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(248, 251, 255, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1.25rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 60px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-sky), var(--accent-blue));
+            border: 4px solid var(--bg-secondary);
+            box-shadow: 0 10px 40px var(--shadow);
+            animation: float-slow 4s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        @keyframes float-slow {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.03em;
+        }
+
+        .profile-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .tagline {
+            color: var(--accent-blue);
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 600;
+        }
+
+        .system-status {
+            display: flex;
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            padding: 0.6rem 1.2rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s ease;
+            animation: fadeInScale 1s ease-out backwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .status-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px var(--shadow);
+            border-color: var(--accent-sky);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .status-dot.alert {
+            background: var(--error);
+            animation: blink-fast 1s infinite;
+        }
+
+        @keyframes blink-fast {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-indigo);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-light);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Dashboard Metrics */
+        .dashboard-card {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .uptime-header {
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+
+        .uptime-title {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .uptime-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-blue);
+        }
+
+        .uptime-subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+
+        .metric-box {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .metric-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px var(--shadow);
+            border-color: var(--accent-sky);
+        }
+
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            text-align: center;
+            transition: all 0.3s;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px var(--shadow);
+            border-color: var(--accent-blue);
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+
+        /* Pipeline Section */
+        .pipeline {
+            padding: 5rem 0;
+            background: #fdfdfd;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .pipeline-container {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 3.5rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
+        }
+
+        .pipeline-stages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            position: relative;
+        }
+
+        .pipeline-stages::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 60px;
+            right: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .stage {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .stage-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-secondary);
+            border: 3px solid var(--accent-blue);
+            border-radius: 50%;
+            margin: 0 auto 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 20px var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: var(--accent-blue);
+        }
+
+        .stage:hover .stage-icon {
+            transform: scale(1.15) rotate(8deg);
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .stage-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .auto-label {
+            font-size: 0.65rem;
+            color: var(--success);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+            letter-spacing: 0.05em;
+        }
+
+        .stage-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            justify-content: center;
+        }
+
+        .tool-tag {
+            background: var(--bg-card);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+        }
+
+        .tool-tag:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Activity Log Section */
+        .activity {
+            padding: 5rem 0;
+        }
+
+        .activity-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .activity-log {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px var(--shadow);
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .activity-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .live-badge {
+            padding: 0.35rem 0.8rem;
+            background: var(--error);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .live-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1.2s infinite;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 1.25rem;
+            padding: 1.1rem 0;
+            border-bottom: 1px solid var(--bg-card);
+            transition: all 0.2s;
+        }
+
+        .activity-item:hover {
+            background: #fafafa;
+            padding-left: 0.5rem;
+        }
+
+        .activity-time {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            min-width: 90px;
+        }
+
+        .activity-message {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .activity-message.success {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .activity-message.security {
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        .achievements-side {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .achievement-item {
+            padding: 1.25rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(8px);
+            border-color: var(--accent-blue);
+            background: white;
+        }
+
+        .achievement-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .achievement-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+
+        /* Freelance Section */
+        .freelance-card {
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+            border-radius: 20px;
+            padding: 4rem;
+            text-align: center;
+            border: 2px dashed var(--accent-blue);
+            margin: 4rem 0;
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.05);
+        }
+
+        .freelance-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-blue);
+        }
+
+        .freelance-card p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Progress Bars */
+        .lang-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            margin-top: 2rem;
+        }
+
+        .lang-row {
+            margin-bottom: 1.5rem;
+        }
+
+        .lang-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .lang-bar {
+            height: 8px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .lang-fill {
+            height: 100%;
+            background: var(--accent-blue);
+            border-radius: 10px;
+            transition: width 1.5s ease;
+        }
+
+        /* Education & Skills Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .edu-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .edu-icon {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+        }
+
+        .skills-matrix {
+            background: var(--bg-secondary);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+        }
+
+        .skills-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .skill-pill {
+            background: var(--bg-card);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid var(--border-light);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        /* Floating background particles */
+        .particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent-sky);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float-particle 15s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(110vh) translateX(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-10vh) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            padding: 4rem 0;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            font-size: 1.5rem;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .social-link:hover {
+            color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-section {
+                flex-direction: column;
+            }
+
+            .details-grid,
+            .activity-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline-stages {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .pipeline-stages::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="particles-bg" id="particles"></div>
+
+    <!-- Floating Geometric Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <div class="status-indicator"></div>
+                SARRA.DEV
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#pipeline">Pipeline</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#activity">Activity</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="profile-section">
+                        <div class="profile-img">
+                            <img src="./assets/sarra_anime_portrait.png" alt="Sarra Portrait">
+                        </div>
+                        <div class="profile-info">
+                            <h1>SARRA MEHREZ</h1>
+                            <p>DevOps & Cloud Engineer Specialist</p>
+                        </div>
+                    </div>
+
+                    <div class="tagline">
+                        <i class="fas fa-sparkles"></i>
+                        <span>"Turn chaos into constellations."</span>
+                        <i class="fas fa-sparkles"></i>
+                    </div>
+
+                    <div class="system-status">
+                        <div class="status-badge">
+                            <div class="status-dot"></div>
+                            <span>ALL SYSTEMS NOMINAL</span>
+                        </div>
+                        <div class="status-badge">
+                            <div class="status-dot alert"></div>
+                            <span>ALERTS: CHAOS</span>
+                        </div>
+                    </div>
+
+                    <p class="hero-description">
+                        I survive production chaos. Specialized in disaster recovery, automation, GitOps, container
+                        orchestration with Kubernetes, and building robust CI/CD pipelines that keep systems resilient.
+                    </p>
+
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" id="heroContact">
+                            <i class="fas fa-satellite-dish"></i>
+                            INITIALIZE MISSION
+                        </button>
+                        <a href="#activity" class="btn btn-secondary">
+                            Live System Status
+                        </a>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="uptime-header">
+                        <div class="uptime-title">Live System Uptime</div>
+                        <div class="uptime-value mono">774d 9h 23m</div>
+                        <div class="uptime-subtitle">Target SLO: 99.95% Availability</div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <div class="metric-value" data-target="5">5</div>
+                            <div class="metric-label">Incidents Resolved</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value mono">~<span data-target="89">89</span></div>
+                            <div class="metric-label">Avg MTTR (min)</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value" data-target="127">127</div>
+                            <div class="metric-label">Chaos Days Survived</div>
+                        </div>
+                        <div class="metric-box">
+                            <div class="metric-value">0</div>
+                            <div class="metric-label">Rollbacks</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pipeline Section -->
+    <section class="pipeline" id="pipeline">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title">ENGINEERING LIFECYCLE</div>
+                <h2 class="section-heading">Integrated Deployment Pipeline</h2>
+            </div>
+
+            <div class="pipeline-container">
+                <div class="pipeline-runner" id="runner">🐳</div>
+                <div class="pipeline-stages">
+                    <div class="stage">
+                        <div class="stage-icon"><i class="fas fa-code-branch"></i></div>
+                        <span class="stage-name">Source</span>
+                        <span class="auto-label"><i class="fas fa-sync"></i> auto-sync</span>
+                        <div class="stage-tools">
+                            <span class="tool-tag">GitHub</span>
+                            <span class="tool-tag">GitLab</span>
+                        </div>
+                    </div>
+
+                    <div class="stage">
+                        <div class="stage-icon"><i class="fab fa-docker"></i></div>
+                        <span class="stage-name">Build</span>
+                        <span class="auto-label"><i class="fas fa-bolt"></i> auto-build</span>
+                        <div class="stage-tools">
+                            <span class="tool-tag">Docker</span>
+                            <span class="tool-tag">GHA</span>
+                        </div>
+                    </div>
+
+                    <div class="stage">
+                        <div class="stage-icon"><i class="fas fa-vial"></i></div>
+                        <span class="stage-name">Test</span>
+                        <span class="auto-label"><i class="fas fa-flask"></i> auto-test</span>
+                        <div class="stage-tools">
+                            <span class="tool-tag">Trivy</span>
+                            <span class="tool-tag">Postman</span>
+                        </div>
+                    </div>
+
+                    <div class="stage">
+                        <div class="stage-icon"><i class="fas fa-rocket"></i></div>
+                        <span class="stage-name">Deploy</span>
+                        <span class="auto-label"><i class="fas fa-check-double"></i> auto-deploy</span>
+                        <div class="stage-tools">
+                            <span class="tool-tag">K8s</span>
+                            <span class="tool-tag">Helm</span>
+                            <span class="tool-tag">Azure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="section-title" style="text-align: center; margin-bottom: 1rem;">FEATURED PROJECTS</div>
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: var(--text-primary);">
+                Building Resilient Infrastructure
+            </h2>
+
+            <div class="projects-grid">
+                <!-- Project 1: Disaster Recovery -->
+                <div class="project-card">
+                    <div class="project-icon">🔄</div>
+                    <h3 class="project-title">Automated Disaster Recovery System</h3>
+                    <p class="project-description">
+                        Designed and implemented a comprehensive disaster recovery solution with automated failover,
+                        backup orchestration, and RTO/RPO monitoring. Reduced recovery time from 4 hours to 15 minutes.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Disaster Recovery</span>
+                        <span class="project-tag">Kubernetes</span>
+                        <span class="project-tag">Velero</span>
+                        <span class="project-tag">Azure</span>
+                    </div>
+                    <a href="https://github.com/SarraMehrez" class="project-link" target="_blank">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Project 2: GitOps Pipeline -->
+                <div class="project-card">
+                    <div class="project-icon">🚀</div>
+                    <h3 class="project-title">GitOps-Driven Multi-Cluster Deployment</h3>
+                    <p class="project-description">
+                        Built a fully automated GitOps pipeline using ArgoCD and Flux for multi-cluster Kubernetes
+                        deployments.
+                        Achieved 100% deployment consistency across dev, staging, and production environments.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">GitOps</span>
+                        <span class="project-tag">ArgoCD</span>
+                        <span class="project-tag">Flux</span>
+                        <span class="project-tag">Helm</span>
+                    </div>
+                    <a href="https://github.com/SarraMehrez" class="project-link" target="_blank">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Project 3: Infrastructure Automation -->
+                <div class="project-card">
+                    <div class="project-icon">⚙️</div>
+                    <h3 class="project-title">Infrastructure Automation Framework</h3>
+                    <p class="project-description">
+                        Created a comprehensive automation framework using Terraform, Ansible, and Python for
+                        provisioning
+                        and managing cloud infrastructure. Reduced manual deployment time by 85%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Automation</span>
+                        <span class="project-tag">Terraform</span>
+                        <span class="project-tag">Ansible</span>
+                        <span class="project-tag">Python</span>
+                    </div>
+                    <a href="https://github.com/SarraMehrez" class="project-link" target="_blank">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Project 4: CI/CD Pipeline -->
+                <div class="project-card">
+                    <div class="project-icon">🔧</div>
+                    <h3 class="project-title">Zero-Downtime CI/CD Pipeline</h3>
+                    <p class="project-description">
+                        Engineered a sophisticated CI/CD pipeline with automated testing, security scanning, and
+                        blue-green deployments. Achieved zero-downtime releases with automated rollback capabilities.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">CI/CD</span>
+                        <span class="project-tag">GitLab CI</span>
+                        <span class="project-tag">Docker</span>
+                        <span class="project-tag">Trivy</span>
+                    </div>
+                    <a href="https://github.com/SarraMehrez" class="project-link" target="_blank">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Project 5: Monitoring & Observability -->
+                <div class="project-card">
+                    <div class="project-icon">📊</div>
+                    <h3 class="project-title">Observability & Monitoring Stack</h3>
+                    <p class="project-description">
+                        Deployed a complete observability solution with Prometheus, Grafana, and ELK stack.
+                        Implemented custom dashboards and alerting rules that reduced MTTR by 60%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Monitoring</span>
+                        <span class="project-tag">Prometheus</span>
+                        <span class="project-tag">Grafana</span>
+                        <span class="project-tag">ELK</span>
+                    </div>
+                    <a href="https://github.com/SarraMehrez" class="project-link" target="_blank">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Project 6: Security Automation -->
+                <div class="project-card">
+                    <div class="project-icon">🔒</div>
+                    <h3 class="project-title">Automated Security Compliance</h3>
+                    <p class="project-description">
+                        Implemented automated security scanning and compliance checks in the CI/CD pipeline.
+                        Integrated Trivy, SonarQube, and OWASP tools to catch vulnerabilities before production.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Security</span>
+                        <span class="project-tag">Automation</span>
+                        <span class="project-tag">Trivy</span>
+                        <span class="project-tag">DevSecOps</span>
+                    </div>
+                    <a href="https://github.com/SarraMehrez" class="project-link" target="_blank">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Refined Freelance CTA -->
+    <div class="container">
+        <section class="freelance-card" style="padding: 2.5rem; margin: 3rem 0;">
+            <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">✨ Open for Proposals ✨</h2>
+            <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem;">Feel free to reach out for
+                project queries or freelance coordination.</p>
+            <button class="btn btn-primary" id="openContact">
+                <i class="fas fa-paper-plane"></i>
+                SEND MISSION BRIEF
+            </button>
+            <p style="margin-top: 1rem; font-weight: 600; color: var(--accent-blue); font-size: 0.9rem;">
+                mehrez.sarra@yahoo.com</p>
+        </section>
+    </div>
+
+    <!-- Activity Log Section -->
+    <section class="activity" id="activity">
+        <div class="container">
+            <div class="activity-container">
+                <div class="activity-log">
+                    <div class="activity-header">
+                        <div class="activity-title">
+                            <i class="fas fa-stream"></i>
+                            Live Activity Stream
+                        </div>
+                        <span class="live-badge">Live System</span>
+                    </div>
+                    <div id="logStream">
+                        <!-- Logs populated by JS -->
+                    </div>
+                </div>
+
+                <div class="achievements-side">
+                    <div class="section-title" style="margin-bottom: 1.5rem;">CORE ACHIEVEMENTS</div>
+                    <div class="achievement-item">
+                        <div class="achievement-number" data-target="47">0</div>
+                        <div class="achievement-label">Vulnerabilities Cleansed</div>
+                    </div>
+                    <div class="achievement-item">
+                        <div class="achievement-number" data-target="23">0</div>
+                        <div class="achievement-label">Broken Builds Restored</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Education Section -->
+    <section class="container" style="padding-bottom: 6rem;">
+        <div class="details-grid">
+            <div class="skills-matrix">
+                <div class="section-title" style="margin-bottom: 2rem;">SKILLS MATRIX</div>
+                <div class="skills-cols">
+                    <div>
+                        <h4 style="margin-bottom: 1rem; color: var(--accent-blue);">DevOps & Cloud</h4>
+                        <span class="skill-pill stagger-1">Kubernetes</span>
+                        <span class="skill-pill stagger-2">Docker</span>
+                        <span class="skill-pill stagger-3">GitLab CI</span>
+                        <span class="skill-pill stagger-4">GHA</span>
+                        <span class="skill-pill stagger-5">Azure</span>
+                        <span class="skill-pill stagger-6">Helm</span>
+                        <span class="skill-pill stagger-1">Prometheus</span>
+                        <span class="skill-pill stagger-2">Grafana</span>
+                        <span class="skill-pill stagger-3">Trivy</span>
+                        <span class="skill-pill stagger-4">ArgoCD</span>
+                        <span class="skill-pill stagger-5">Flux</span>
+                        <span class="skill-pill stagger-6">Velero</span>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 1rem; color: var(--accent-blue);">Automation & IaC</h4>
+                        <span class="skill-pill stagger-1">Terraform</span>
+                        <span class="skill-pill stagger-2">Ansible</span>
+                        <span class="skill-pill stagger-3">Python</span>
+                        <span class="skill-pill stagger-4">Bash</span>
+                        <span class="skill-pill stagger-5">Node.js</span>
+                        <span class="skill-pill stagger-6">JavaScript</span>
+                        <span class="skill-pill stagger-1">PHP</span>
+                        <span class="skill-pill stagger-2">Git</span>
+                        <span class="skill-pill stagger-3">Jira</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="edu-card">
+                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div>
+                        <h4 style="font-size: 1rem;">Master’s in DevOps & Cloud</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">IU International
+                            University (Germany)</p>
+                    </div>
+                </div>
+                <div class="edu-card">
+                    <div class="edu-icon"><i class="fas fa-university"></i></div>
+                    <div>
+                        <h4 style="font-size: 1rem;">Bachelor’s in CS</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">ISIM Monastir
+                            (Tunisia)</p>
+                    </div>
+                </div>
+                <div class="lang-card">
+                    <div class="lang-row">
+                        <div class="lang-info"><span>Arabic</span> <span>Native</span></div>
+                        <div class="lang-bar">
+                            <div class="lang-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-info"><span>English</span> <span>Proficient</span></div>
+                        <div class="lang-bar">
+                            <div class="lang-fill" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/SarraMehrez" target="_blank" class="social-link"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/sarramehrez" target="_blank" class="social-link"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="mailto:mehrez.sarra@yahoo.com" class="social-link"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p style="margin-bottom: 0.5rem;">Sarra Mehrez · DevOps Engineer</p>
+            <p style="font-size: 0.8rem; opacity: 0.6;">© 2026 Built with Production Resilience</p>
+        </div>
+    </footer>
+
+    <!-- Peeking Cat Mascot -->
+    <div class="peeking-cat" id="cat">
+        <!-- Using a placeholder system to restore the cat visually -->
+        <svg viewBox="0 0 100 80" style="width:100%; height:auto;">
+            <path d="M20,60 Q20,20 50,20 T80,60" fill="#FFAD60" />
+            <path d="M30,25 L20,5 L40,20 Z" fill="#FFAD60" />
+            <path d="M70,25 L80,5 L60,20 Z" fill="#FFAD60" />
+            <circle cx="40" cy="45" r="4" fill="#333" />
+            <circle cx="60" cy="45" r="4" fill="#333" />
+            <path d="M45,55 Q50,60 55,55" fill="none" stroke="#333" stroke-width="2" />
+        </svg>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal-overlay" id="contactOverlay">
+        <div class="contact-modal">
+            <h3 style="margin-bottom: 0.5rem; font-weight:700;">Initialize Mission</h3>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 2rem;">Feel free to reach out or
+                send project queries below.</p>
+
+            <div id="submitStatus" class="submit-status">
+                <i class="fas fa-check-circle"></i> SIGNAL ENCRYPTED & SENT!
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.8;">Important: Check your email
+                    (mehrez.sarra@yahoo.com) for a Formspree activation link if this is your first time using this ID.
+                </p>
+            </div>
+
+            <form id="contactForm" action="https://formspree.io/f/xanyqvbp" method="POST">
+                <div class="form-group">
+                    <label>IDENTIFIER (SENDER NAME)</label>
+                    <input type="text" name="name" id="contactName" placeholder="Observer Name" required>
+                </div>
+                <div class="form-group">
+                    <label>COORDINATES (SENDER EMAIL)</label>
+                    <input type="email" name="_replyto" id="contactEmail" placeholder="hq@yourproject.com" required>
+                </div>
+                <div class="form-group">
+                    <label>TRANSMISSION (MESSAGE body)</label>
+                    <textarea name="message" id="contactMessage" rows="4"
+                        placeholder="Brief your mission requirements..." required></textarea>
+                </div>
+                <input type="hidden" name="_subject" value="New Portfolio Mission Brief!">
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    <i class="fas fa-satellite-dish"></i> SEND SIGNAL
+                </button>
+            </form>
+
+            <div
+                style="margin-top: 1.5rem; text-align: center; border-top: 1px solid var(--border-light); padding-top: 1rem;">
+                <p style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem;">OR DIRECT TRANSMISSION:
+                </p>
+                <a href="mailto:mehrez.sarra@yahoo.com"
+                    style="color: var(--accent-blue); font-size: 0.85rem; font-weight: 700; text-decoration: none;">
+                    <i class="fas fa-envelope-open-text"></i> mehrez.sarra@yahoo.com
+                </a>
+            </div>
+
+            <button id="closeModal"
+                style="background: none; border: none; color: var(--text-muted); width: 100%; margin-top: 1rem; cursor: pointer; font-size: 0.8rem; font-weight: 700;">CLOSE
+                TERMINAL</button>
+        </div>
+    </div>
+
+    <script>
+        // Background particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 6 + 2;
+            p.style.width = p.style.height = `${size}px`;
+            p.style.left = `${Math.random() * 100}%`;
+            p.style.animationDelay = `${Math.random() * 15}s`;
+            p.style.animationDuration = `${Math.random() * 5 + 10}s`;
+            particlesContainer.appendChild(p);
+        }
+
+        // Count up animation
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = parseInt(entry.target.getAttribute('data-target'));
+                    let current = 0;
+                    const step = () => {
+                        if (current < target) {
+                            current += Math.ceil(target / 40);
+                            if (current > target) current = target;
+                            entry.target.innerText = current;
+                            requestAnimationFrame(step);
+                        }
+                    };
+                    step();
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('[data-target]').forEach(el => obs.observe(el));
+
+        // Pipeline runner logic
+        const runner = document.getElementById('runner');
+        const runnerIcons = ['🐳', '🚀', '🛠️', '📦', '☸️'];
+        let rIdx = 0;
+        setInterval(() => {
+            rIdx = (rIdx + 1) % runnerIcons.length;
+            if (runner) runner.innerText = runnerIcons[rIdx];
+        }, 3000);
+
+        // Logs Stream
+        const logs = [
+            { time: "10:17:19 AM", msg: "System integrity verify: OK", type: "success" },
+            { time: "10:17:20 AM", msg: "Monitoring active", type: "" },
+            { time: "10:17:20 AM", msg: "Security audit: 0 threats detected", type: "security" },
+            { time: "10:18:00 AM", msg: "Deployment: Build #248 synced", type: "success" },
+            { time: "10:18:30 AM", msg: "Cache strategy reloaded", type: "" },
+            { time: "10:23:00 AM", msg: "Service 'core-api' scaling up", type: "success" }
+        ];
+        const stream = document.getElementById('logStream');
+        logs.forEach((l, i) => {
+            setTimeout(() => {
+                const div = document.createElement('div');
+                div.className = 'activity-item';
+                div.innerHTML = `<span class="activity-time">[${l.time}]</span> <span class="activity-message ${l.type}">${l.msg}</span>`;
+                stream.appendChild(div);
+                stream.scrollTop = stream.scrollHeight;
+            }, i * 500);
+        });
+
+        // Peeking Cat Interaction Logic
+        const cat = document.getElementById('cat');
+        const showCat = () => {
+            if (cat) cat.classList.add('active');
+            setTimeout(() => { if (cat) cat.classList.remove('active'); }, 5000);
+        };
+        setTimeout(showCat, 3000);
+        setInterval(showCat, 12000);
+
+        if (cat) {
+            cat.addEventListener('click', () => {
+                cat.style.transform = 'scale(1.5) translateY(-20px)';
+                setTimeout(() => { cat.style.transform = ''; }, 500);
+            });
+        }
+
+        // Contact Modal Interaction Logic
+        const overlay = document.getElementById('contactOverlay');
+        const openModalBtn = document.getElementById('openContact');
+        const heroModalBtn = document.getElementById('heroContact');
+        const closeBtn = document.getElementById('closeModal');
+        const contactForm = document.getElementById('contactForm');
+        const statusBox = document.getElementById('submitStatus');
+
+        const openModal = () => {
+            overlay.classList.add('active');
+        };
+
+        if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+        if (heroModalBtn) heroModalBtn.addEventListener('click', openModal);
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                overlay.classList.remove('active');
+            });
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.classList.remove('active');
+        });
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = contactForm.querySelector('button');
+                const orig = btn.innerHTML;
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const messageContent = document.getElementById('contactMessage').value;
+
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENCRYPTING SIGNAL...';
+                btn.disabled = true;
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        statusBox.style.display = 'block';
+                        statusBox.innerHTML = '<i class="fas fa-check-circle"></i> Signal Received! <br><small>Confirm the activation email if this is your first test.</small>';
+                        btn.innerHTML = '<i class="fas fa-check"></i> SIGNAL SENT';
+
+                        // Interaction: Make cat jump
+                        if (cat) {
+                            cat.style.bottom = "50px";
+                            setTimeout(() => cat.style.bottom = "", 1000);
+                        }
+
+                        setTimeout(() => {
+                            overlay.classList.remove('active');
+                            statusBox.style.display = 'none';
+                            btn.innerHTML = orig;
+                            btn.disabled = false;
+                            contactForm.reset();
+                        }, 3000);
+                    } else { throw new Error(); }
+                } catch (err) {
+                    // FALLBACK: Detailed Mailto
+                    const mailtoBody = `From: ${name} (${email})%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(messageContent)}`;
+                    window.location.href = `mailto:mehrez.sarra@yahoo.com?subject=New Mission Brief from ${name}&body=${mailtoBody}`;
+
+                    overlay.classList.remove('active');
+                    btn.innerHTML = orig;
+                    btn.disabled = false;
+                    contactForm.reset();
+                }
+            });
+        }
+
+        // --- REVAMPED: REAL-TIME DYNAMIC SYSTEM LOGS ---
+        const logTemplates = [
+            { m: "Trivy: Scanning container images...", t: "security" },
+            { m: "K8s: HorizontalPodAutoscaler scaling up...", t: "" },
+            { m: "GitHub: Webhook received, build #$NUM triggered", t: "success" },
+            { m: "Docker: Pruning orphaned layers...", t: "system" },
+            { m: "Helm: Deploying release $APP v2.4.1...", t: "success" },
+            { m: "Security: Monitoring SSL/TLS expiry ($DAYS days left)", t: "security" },
+            { m: "Grafana: Alert [CPU_USAGE_HIGH] firing...", t: "security" },
+            { m: "Pipeline: Build #$NUM verification passed", t: "success" },
+            { m: "Azure: Synchronizing cluster state...", t: "" },
+            { m: "ArgoCD: Syncing production-east-1...", t: "success" },
+            { m: "GitOps: Drift detected in namespace $NS, reconciling...", t: "security" },
+            { m: "Backup: Velero snapshot task starting...", t: "system" }
+        ];
+
+        const apps = ["auth-service", "gateway-api", "payment-engine", "data-sync-worker"];
+        const namespaces = ["prod", "staging", "kube-system"];
+
+        const addLiveLog = () => {
+            const template = logTemplates[Math.floor(Math.random() * logTemplates.length)];
+            let message = template.m
+                .replace("$NUM", Math.floor(Math.random() * 500) + 100)
+                .replace("$APP", apps[Math.floor(Math.random() * apps.length)])
+                .replace("$DAYS", Math.floor(Math.random() * 30) + 10)
+                .replace("$NS", namespaces[Math.floor(Math.random() * namespaces.length)]);
+
+            const div = document.createElement('div');
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            div.className = 'activity-item';
+            div.style.opacity = '0';
+            div.style.transform = 'translateY(10px)';
+            div.style.transition = 'all 0.4s ease';
+
+            div.innerHTML = `<span class="activity-time">[${now}]</span> <span class="activity-message ${template.t}"></span>`;
+            stream.appendChild(div);
+
+            const msgSpan = div.querySelector('.activity-message');
+
+            // "Typing" effect
+            let charIdx = 0;
+            const typeChar = () => {
+                if (charIdx < message.length) {
+                    msgSpan.textContent += message.charAt(charIdx);
+                    charIdx++;
+                    setTimeout(typeChar, Math.random() * 20 + 5);
+                }
+            };
+
+            setTimeout(() => {
+                div.style.opacity = '1';
+                div.style.transform = 'translateY(0)';
+                typeChar();
+            }, 100);
+
+            stream.scrollTop = stream.scrollHeight;
+
+            // Limit log count
+            if (stream.children.length > 20) {
+                stream.removeChild(stream.firstChild);
+            }
+        };
+
+        // Initial burst
+        for (let i = 0; i < 5; i++) setTimeout(addLiveLog, i * 600);
+
+        // Random intervals for "realism"
+        const nextLog = () => {
+            addLiveLog();
+            const delay = Math.random() * 3000 + 1000; // 1-4 seconds (faster)
+            setTimeout(nextLog, delay);
+        };
+        setTimeout(nextLog, 4000);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId.startsWith('#')) {
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // --- CURSOR TRAIL EFFECT (Antigravity Style) ---
+        const colors = [
+            'rgba(59, 130, 246, 0.6)',   // Blue
+            'rgba(96, 165, 250, 0.6)',   // Sky
+            'rgba(34, 211, 238, 0.6)',   // Cyan
+            'rgba(20, 184, 166, 0.6)',   // Teal
+            'rgba(99, 102, 241, 0.6)'    // Indigo
+        ];
+
+        let lastTrailTime = 0;
+        const trailThrottle = 30; // milliseconds between trails
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastTrailTime < trailThrottle) return;
+            lastTrailTime = now;
+
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = e.pageX + 'px';
+            trail.style.top = e.pageY + 'px';
+            trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+            document.body.appendChild(trail);
+
+            // Remove after animation completes
+            setTimeout(() => {
+                trail.remove();
+            }, 800);
+        });
+
+        // Enhanced hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('.btn, .project-card, .stat-card, .skill-pill, .nav-links a');
+
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', function () {
+                this.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            });
+        });
+
+        // Add subtle parallax effect to project cards
+        const projectCards = document.querySelectorAll('.project-card');
+
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Update CSS variables for glow effect
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+</body>
+
+</html>

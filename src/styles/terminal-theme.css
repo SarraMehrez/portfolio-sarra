@@ -1,0 +1,426 @@
+/**
+ * Terminal Theme - Color System and Design Tokens
+ * Inspired by terminal emulators and mission control aesthetics
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════ */
+  /* COLOR PALETTE - Modern SRE Dashboard */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  /* Status Colors */
+  --color-success: #20D9B2;
+  /* Teal - operational/healthy */
+  --color-warning: #FFB020;
+  /* Warm amber - attention needed */
+  --color-danger: #FF4757;
+  /* Soft red - critical */
+  --color-info: #2A8BFF;
+  /* Electric blue - informational */
+  --color-neutral: #E8EDF3;
+  /* Soft white - normal state */
+
+  /* Background Colors */
+  --bg-primary: #0A0F1C;
+  /* Deep navy base */
+  --bg-secondary: #0F1419;
+  /* Slightly elevated */
+  --bg-tertiary: #151B26;
+  /* Card backgrounds */
+  --bg-elevated: #1A2332;
+  /* Hover states */
+  --bg-glass: rgba(255, 255, 255, 0.03);
+  /* Glass-morphism overlay */
+
+  /* Text Colors */
+  --text-primary: #E8EDF3;
+  /* High contrast white */
+  --text-secondary: #8B95A5;
+  /* Muted gray */
+  --text-muted: #5A6370;
+  /* Very muted */
+  --text-accent: #2A8BFF;
+  /* Electric blue accent */
+
+  /* Border Colors */
+  --border-primary: rgba(255, 255, 255, 0.08);
+  /* Subtle white borders */
+  --border-secondary: rgba(42, 139, 255, 0.2);
+  /* Blue accent borders */
+  --border-danger: rgba(255, 71, 87, 0.3);
+  /* Red borders */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  /* Very subtle dividers */
+  --border-glass: rgba(255, 255, 255, 0.1);
+  /* Glass borders */
+
+  /* Severity Colors */
+  --sev-1: #FF4757;
+  /* Critical - soft red */
+  --sev-2: #FFB020;
+  /* High - amber */
+  --sev-3: #FFC837;
+  /* Medium - yellow */
+  --sev-4: #20D9B2;
+  /* Low - teal */
+
+  /* Accent Colors */
+  --accent-blue: #2A8BFF;
+  /* Electric blue */
+  --accent-teal: #20D9B2;
+  /* Teal */
+  --accent-purple: #7B61FF;
+  /* Muted purple */
+  --accent-cyan: #00D9FF;
+  /* Bright cyan */
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* TYPOGRAPHY */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --font-size-xs: 0.75rem;
+  /* 12px */
+  --font-size-sm: 0.875rem;
+  /* 14px */
+  --font-size-base: 1rem;
+  /* 16px */
+  --font-size-lg: 1.125rem;
+  /* 18px */
+  --font-size-xl: 1.25rem;
+  /* 20px */
+  --font-size-2xl: 1.5rem;
+  /* 24px */
+  --font-size-3xl: 2rem;
+  /* 32px */
+  --font-size-4xl: 2.5rem;
+  /* 40px */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* SPACING SYSTEM (8px base) */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  --space-1: 0.5rem;
+  /* 8px */
+  --space-2: 1rem;
+  /* 16px */
+  --space-3: 1.5rem;
+  /* 24px */
+  --space-4: 2rem;
+  /* 32px */
+  --space-5: 2.5rem;
+  /* 40px */
+  --space-6: 3rem;
+  /* 48px */
+  --space-8: 4rem;
+  /* 64px */
+  --space-10: 5rem;
+  /* 80px */
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* BORDER RADIUS */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* SHADOWS & GLASS-MORPHISM */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --shadow-glow-blue: 0 0 20px rgba(42, 139, 255, 0.15);
+  --shadow-glow-teal: 0 0 20px rgba(32, 217, 178, 0.15);
+
+  /* Glass-morphism effect */
+  --glass-backdrop: blur(12px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* TRANSITIONS */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* Z-INDEX LAYERS */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  --z-base: 1;
+  --z-elevated: 10;
+  --z-header: 100;
+  --z-terminal: 200;
+  --z-modal: 1000;
+  --z-command-palette: 2000;
+
+  /* ═══════════════════════════════════════════════════════════ */
+  /* ANIMATIONS */
+  /* ═══════════════════════════════════════════════════════════ */
+
+  --animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animation-blink: blink 1s step-end infinite;
+  --animation-glow: glow 2s ease-in-out infinite alternate;
+  --animation-scan: scan 4s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* KEYFRAME ANIMATIONS */
+/* ═══════════════════════════════════════════════════════════ */
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px var(--color-success),
+      0 0 10px var(--color-success),
+      0 0 15px var(--color-success);
+  }
+
+  to {
+    box-shadow: 0 0 10px var(--color-success),
+      0 0 20px var(--color-success),
+      0 0 30px var(--color-success);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* UTILITY CLASSES */
+/* ═══════════════════════════════════════════════════════════ */
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-danger {
+  color: var(--color-danger);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-danger {
+  background-color: var(--color-danger);
+}
+
+.bg-info {
+  background-color: var(--color-info);
+}
+
+.border-success {
+  border-color: var(--color-success);
+}
+
+.border-warning {
+  border-color: var(--color-warning);
+}
+
+.border-danger {
+  border-color: var(--color-danger);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.pulse {
+  animation: var(--animation-pulse);
+}
+
+.blink {
+  animation: var(--animation-blink);
+}
+
+.glow {
+  animation: var(--animation-glow);
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* TERMINAL EFFECTS */
+/* ═══════════════════════════════════════════════════════════ */
+
+.terminal-text {
+  font-family: var(--font-mono);
+  color: var(--color-success);
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+.terminal-cursor::after {
+  content: '█';
+  animation: var(--animation-blink);
+  margin-left: 2px;
+}
+
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to bottom,
+      transparent,
+      rgba(0, 255, 0, 0.3),
+      transparent);
+  animation: var(--animation-scan);
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* GLITCH EFFECT */
+/* ═══════════════════════════════════════════════════════════ */
+
+.glitch {
+  position: relative;
+  color: var(--text-primary);
+  animation: glitch 1s linear infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--color-danger);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--color-info);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch 5s infinite linear alternate-reverse;
+}

@@ -1,0 +1,39 @@
+{
+  "name": "devops-incident-portfolio",
+  "version": "1.0.0",
+  "description": "Living DevOps portfolio demonstrating incident response and automation expertise",
+  "main": "src/index.html",
+  "scripts": {
+    "dev": "node scripts/mock-prometheus.js & npx serve src -l 8080",
+    "build": "node scripts/generate-feed.js && npm run copy-assets",
+    "copy-assets": "node -e \"require('fs-extra').copySync('src', 'dist')\"",
+    "generate-feed": "node scripts/generate-feed.js",
+    "lint:js": "eslint src/scripts/**/*.js",
+    "lint:css": "stylelint src/styles/**/*.css",
+    "lint:html": "htmlhint src/**/*.html",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html"
+  },
+  "keywords": [
+    "devops",
+    "portfolio",
+    "incident-response",
+    "ci-cd",
+    "kubernetes",
+    "terraform",
+    "aws"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "fs-extra": "^11.2.0",
+    "htmlhint": "^1.1.4",
+    "js-yaml": "^4.1.0",
+    "serve": "^14.2.1",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
