@@ -40,27 +40,28 @@
         const alert = document.createElement('div');
 
         alert.style.cssText = `
-            background: #ffffff;
+            background: #0f1f36;
             border-left: 6px solid ${template.color};
             border-radius: 12px;
             padding: 1.25rem;
             margin-bottom: 1rem;
-            box-shadow: 0 15px 40px rgba(1, 31, 75, 0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
             pointer-events: auto;
             animation: slideInRight 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
             transition: all 0.3s ease;
+            border: 1px solid rgba(30, 58, 95, 0.5);
         `;
 
         alert.innerHTML = `
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
                     <span style="font-size: 1.5rem;">${template.icon}</span>
-                    <span style="font-weight: 800; font-size: 0.9rem; color: #011f4b; letter-spacing: 0.03em;">${template.title}</span>
+                    <span style="font-weight: 800; font-size: 0.9rem; color: #e8f0ff; letter-spacing: 0.03em;">${template.title}</span>
                 </div>
                 <span style="font-size: 0.7rem; color: ${template.color}; font-weight: 700;">● LIVE</span>
             </div>
-            <div style="font-size: 0.8rem; color: #03396c; font-family: 'JetBrains Mono', monospace; line-height: 1.5;">
+            <div style="font-size: 0.8rem; color: #b3cde0; font-family: 'JetBrains Mono', monospace; line-height: 1.5;">
                 ${template.body}
             </div>
         `;
