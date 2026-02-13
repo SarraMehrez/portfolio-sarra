@@ -16,9 +16,6 @@ RUN npm ci --only=production
 # Copy source files
 COPY . .
 
-# Generate feed data
-RUN npm run generate-feed
-
 # Build production bundle
 RUN npm run build
 

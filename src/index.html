@@ -21,16 +21,16 @@
             --bg-primary: #f8fbff;
             --bg-secondary: #ffffff;
             --bg-card: #f0f4f9;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
+            --text-primary: #011f4b;
+            --text-secondary: #03396c;
+            --text-muted: #6497b1;
 
-            /* Blue Themed Palette */
-            --accent-blue: #3b82f6;
-            --accent-sky: #60a5fa;
-            --accent-cyan: #22d3ee;
-            --accent-teal: #14b8a6;
-            --accent-indigo: #6366f1;
+            /* Darker Blue Themed Palette */
+            --accent-blue: #005b96;
+            --accent-sky: #6497b1;
+            --accent-cyan: #03396c;
+            --accent-teal: #005b96;
+            --accent-indigo: #011f4b;
 
             --border-light: #e2e8f0;
             --shadow: rgba(0, 0, 0, 0.04);
@@ -604,6 +604,384 @@
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
             color: white;
             border-color: transparent;
+        }
+
+        /* Pro DevOps Skill Rows */
+        .skill-pill-pro {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            border-left: 3px solid var(--accent-blue);
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .skill-pill-pro:hover {
+            background: white;
+            transform: translateX(10px);
+            border-left-color: var(--accent-indigo);
+            box-shadow: -5px 0 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .status-ok {
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        /* DevOps Education Cards */
+        .edu-card-pro {
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 2px solid var(--accent-blue);
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .edu-card-pro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-blue), var(--accent-indigo));
+        }
+
+        .edu-card-pro:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.15);
+            border-color: var(--accent-indigo);
+        }
+
+        .edu-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--accent-blue);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        /* Docker Container Visualization */
+        .docker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .docker-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .docker-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--success);
+        }
+
+        .docker-container.warning::before {
+            background: var(--warning);
+            animation: pulse-warning 2s infinite;
+        }
+
+        @keyframes pulse-warning {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .docker-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+        }
+
+        .container-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .container-icon {
+            font-size: 1.5rem;
+        }
+
+        .container-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .container-status {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        .status-running {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        /* Live Alert System */
+        .alerts-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 320px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .alert-item {
+            background: white;
+            border-left: 4px solid var(--warning);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            animation: slideInRight 0.4s ease-out;
+            pointer-events: auto;
+        }
+
+        .alert-item.error {
+            border-left-color: var(--error);
+        }
+
+        .alert-item.info {
+            border-left-color: var(--accent-blue);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .alert-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-body {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Mini Metrics Dashboard */
+        .metrics-dashboard {
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-light);
+            margin-top: 2rem;
+        }
+
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .metric-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-item:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .metric-value-lg {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label-sm {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Enhanced Pipeline */
+        .pipeline-stage-enhanced {
+            position: relative;
+        }
+
+        .stage-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.2);
+            animation: pulse-ring 2s infinite;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .stage:hover .stage-pulse {
+            opacity: 1;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Multi-Color Mojo Bubbles */
+        .mojo-bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -2;
+            overflow: hidden;
+            filter: blur(100px);
+            opacity: 0.6;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-bubble 30s infinite ease-in-out;
+        }
+
+        .bubble:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            left: -150px;
+            background: rgba(59, 130, 246, 0.4);
+        }
+
+        .bubble:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            right: -100px;
+            background: rgba(139, 92, 246, 0.3);
+            animation-delay: -7s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 450px;
+            height: 450px;
+            top: 20%;
+            right: 10%;
+            background: rgba(34, 211, 238, 0.3);
+            animation-delay: -15s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 300px;
+            height: 300px;
+            bottom: 30%;
+            left: 15%;
+            background: rgba(20, 184, 166, 0.3);
+            animation-delay: -22s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 250px;
+            height: 250px;
+            top: 10%;
+            left: 40%;
+            background: rgba(236, 72, 153, 0.2);
+            animation-delay: -5s;
+        }
+
+        @keyframes float-bubble {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(150px, -50px) scale(1.1) rotate(90deg);
+            }
+
+            50% {
+                transform: translate(50px, 150px) scale(0.9) rotate(180deg);
+            }
+
+            75% {
+                transform: translate(-100px, 50px) scale(1.05) rotate(270deg);
+            }
         }
 
         @keyframes skillPillPop {
@@ -1666,6 +2044,13 @@
 </head>
 
 <body>
+    <div class="mojo-bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
     <div class="particles-bg" id="particles"></div>
 
     <!-- Floating Geometric Shapes -->
@@ -1699,19 +2084,24 @@
             <div class="hero-grid">
                 <div class="hero-content">
                     <div class="profile-section">
-                        <div class="profile-img">
-                            <img src="./assets/sarra_anime_portrait.png" alt="Sarra Portrait">
+                        <div class="profile-img"
+                            style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e293b, #334155); border: 1px solid var(--accent-blue);">
+                            <i class="fas fa-user-shield" style="font-size: 3rem; color: var(--accent-blue);"></i>
                         </div>
                         <div class="profile-info">
                             <h1>SARRA MEHREZ</h1>
-                            <p>DevOps & Cloud Engineer Specialist</p>
+                            <p>DevOps Architect & Automation Specialist</p>
                         </div>
                     </div>
 
                     <div class="tagline">
-                        <i class="fas fa-sparkles"></i>
-                        <span>"Turn chaos into constellations."</span>
-                        <i class="fas fa-sparkles"></i>
+                        <i class="fas fa-terminal"></i>
+                        <span>Automating Resilience · Disaster Recovery · GitOps</span>
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <div
+                        style="margin-bottom: 2rem; font-weight: 500; font-family: 'JetBrains Mono'; color: var(--accent-blue);">
+                        <i class="fas fa-envelope"></i> mehrez.sarra@yahoo.com
                     </div>
 
                     <div class="system-status">
@@ -1726,8 +2116,9 @@
                     </div>
 
                     <p class="hero-description">
-                        I survive production chaos. Specialized in disaster recovery, automation, GitOps, container
-                        orchestration with Kubernetes, and building robust CI/CD pipelines that keep systems resilient.
+                        I build automated bastions. Specialized in end-to-end CI/CD automation, complex disaster
+                        recovery strategies, and self-healing Kubernetes infrastructure. Focused on ensuring 99.99%
+                        availability through code.
                     </p>
 
                     <div class="cta-buttons">
@@ -1782,7 +2173,8 @@
             <div class="pipeline-container">
                 <div class="pipeline-runner" id="runner">🐳</div>
                 <div class="pipeline-stages">
-                    <div class="stage">
+                    <div class="stage pipeline-stage-enhanced">
+                        <div class="stage-pulse"></div>
                         <div class="stage-icon"><i class="fas fa-code-branch"></i></div>
                         <span class="stage-name">Source</span>
                         <span class="auto-label"><i class="fas fa-sync"></i> auto-sync</span>
@@ -1792,7 +2184,8 @@
                         </div>
                     </div>
 
-                    <div class="stage">
+                    <div class="stage pipeline-stage-enhanced">
+                        <div class="stage-pulse"></div>
                         <div class="stage-icon"><i class="fab fa-docker"></i></div>
                         <span class="stage-name">Build</span>
                         <span class="auto-label"><i class="fas fa-bolt"></i> auto-build</span>
@@ -1802,7 +2195,8 @@
                         </div>
                     </div>
 
-                    <div class="stage">
+                    <div class="stage pipeline-stage-enhanced">
+                        <div class="stage-pulse"></div>
                         <div class="stage-icon"><i class="fas fa-vial"></i></div>
                         <span class="stage-name">Test</span>
                         <span class="auto-label"><i class="fas fa-flask"></i> auto-test</span>
@@ -1812,7 +2206,8 @@
                         </div>
                     </div>
 
-                    <div class="stage">
+                    <div class="stage pipeline-stage-enhanced">
+                        <div class="stage-pulse"></div>
                         <div class="stage-icon"><i class="fas fa-rocket"></i></div>
                         <span class="stage-name">Deploy</span>
                         <span class="auto-label"><i class="fas fa-check-double"></i> auto-deploy</span>
@@ -1820,6 +2215,86 @@
                             <span class="tool-tag">K8s</span>
                             <span class="tool-tag">Helm</span>
                             <span class="tool-tag">Azure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Metrics Dashboard -->
+            <div class="metrics-dashboard">
+                <h3
+                    style="font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 1.5rem; font-family: 'JetBrains Mono';">
+                    <i class="fas fa-chart-line"></i> LIVE INFRASTRUCTURE METRICS
+                </h3>
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value-lg" id="liveRequests">1.2K</div>
+                        <div class="metric-label-sm">Req/Min</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value-lg" style="color: var(--success);" id="liveCpu">23%</div>
+                        <div class="metric-label-sm">CPU Usage</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value-lg" style="color: var(--warning);" id="liveMemory">68%</div>
+                        <div class="metric-label-sm">Memory</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value-lg" style="color: var(--success);" id="liveUptime">99.98%</div>
+                        <div class="metric-label-sm">Uptime</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docker Containers Visualization -->
+            <div style="margin-top: 2.5rem;">
+                <h3
+                    style="font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 1rem; font-family: 'JetBrains Mono';">
+                    <i class="fab fa-docker"></i> RUNNING CONTAINERS [PROD]
+                </h3>
+                <div class="docker-grid">
+                    <div class="docker-container">
+                        <div class="container-header">
+                            <div class="container-icon">🐳</div>
+                            <div class="container-name">nginx-proxy</div>
+                        </div>
+                        <div class="container-status status-running">RUNNING</div>
+                        <div
+                            style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'JetBrains Mono';">
+                            Port: 80:80 | Up 47d
+                        </div>
+                    </div>
+                    <div class="docker-container">
+                        <div class="container-header">
+                            <div class="container-icon">⚙️</div>
+                            <div class="container-name">api-gateway</div>
+                        </div>
+                        <div class="container-status status-running">RUNNING</div>
+                        <div
+                            style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'JetBrains Mono';">
+                            Port: 8080 | Up 47d
+                        </div>
+                    </div>
+                    <div class="docker-container warning">
+                        <div class="container-header">
+                            <div class="container-icon">📊</div>
+                            <div class="container-name">prometheus</div>
+                        </div>
+                        <div class="container-status status-warning">HIGH MEM</div>
+                        <div
+                            style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'JetBrains Mono';">
+                            Port: 9090 | Up 47d
+                        </div>
+                    </div>
+                    <div class="docker-container">
+                        <div class="container-header">
+                            <div class="container-icon">🗄️</div>
+                            <div class="container-name">postgres-db</div>
+                        </div>
+                        <div class="container-status status-running">RUNNING</div>
+                        <div
+                            style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; font-family: 'JetBrains Mono';">
+                            Port: 5432 | Up 47d
                         </div>
                     </div>
                 </div>
@@ -1960,14 +2435,11 @@
     <div class="container">
         <section class="freelance-card" style="padding: 2.5rem; margin: 3rem 0;">
             <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">✨ Open for Proposals ✨</h2>
-            <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem;">Feel free to reach out for
+            <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Feel free to reach out for
                 project queries or freelance coordination.</p>
-            <button class="btn btn-primary" id="openContact">
-                <i class="fas fa-paper-plane"></i>
-                SEND MISSION BRIEF
-            </button>
-            <p style="margin-top: 1rem; font-weight: 600; color: var(--accent-blue); font-size: 0.9rem;">
-                mehrez.sarra@yahoo.com</p>
+            <p style="margin-top: 1rem; font-weight: 600; color: var(--accent-blue); font-size: 1.1rem;">
+                <i class="fas fa-envelope-open-text"></i> mehrez.sarra@yahoo.com
+            </p>
         </section>
     </div>
 
@@ -2006,55 +2478,101 @@
     <!-- Skills & Education Section -->
     <section class="container" style="padding-bottom: 6rem;">
         <div class="details-grid">
-            <div class="skills-matrix">
-                <div class="section-title" style="margin-bottom: 2rem;">SKILLS MATRIX</div>
-                <div class="skills-cols">
+            <div class="skills-matrix" style="grid-column: 1 / -1;">
+                <div class="section-title" style="margin-bottom: 2rem; color: var(--accent-blue);">⚡ TECHNICAL STACK
+                    MATRIX [PROD_READY]</div>
+                <div class="skills-cols" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
                     <div>
-                        <h4 style="margin-bottom: 1rem; color: var(--accent-blue);">DevOps & Cloud</h4>
-                        <span class="skill-pill stagger-1">Kubernetes</span>
-                        <span class="skill-pill stagger-2">Docker</span>
-                        <span class="skill-pill stagger-3">GitLab CI</span>
-                        <span class="skill-pill stagger-4">GHA</span>
-                        <span class="skill-pill stagger-5">Azure</span>
-                        <span class="skill-pill stagger-6">Helm</span>
-                        <span class="skill-pill stagger-1">Prometheus</span>
-                        <span class="skill-pill stagger-2">Grafana</span>
-                        <span class="skill-pill stagger-3">Trivy</span>
-                        <span class="skill-pill stagger-4">ArgoCD</span>
-                        <span class="skill-pill stagger-5">Flux</span>
-                        <span class="skill-pill stagger-6">Velero</span>
+                        <h4
+                            style="margin-bottom: 1.5rem; color: var(--accent-blue); font-family: 'JetBrains Mono'; font-size: 0.9rem; border-bottom: 2px solid var(--border-light); padding-bottom: 0.5rem;">
+                            <i class="fas fa-cubes"></i> ORCHESTRATION & CLOUD
+                        </h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <div class="skill-pill-pro"><span>Kubernetes (AKS/EKS)</span> <span
+                                    class="status-ok">NOMINAL</span></div>
+                            <div class="skill-pill-pro"><span>Docker Engine</span> <span
+                                    class="status-ok">NOMINAL</span></div>
+                            <div class="skill-pill-pro"><span>Azure Cloud Hub</span> <span
+                                    class="status-ok">99.9%</span></div>
+                            <div class="skill-pill-pro"><span>Helm Packaging</span> <span
+                                    class="status-ok">NOMINAL</span></div>
+                        </div>
                     </div>
                     <div>
-                        <h4 style="margin-bottom: 1rem; color: var(--accent-blue);">Automation & IaC</h4>
-                        <span class="skill-pill stagger-1">Terraform</span>
-                        <span class="skill-pill stagger-2">Ansible</span>
-                        <span class="skill-pill stagger-3">Python</span>
-                        <span class="skill-pill stagger-4">Bash</span>
-                        <span class="skill-pill stagger-5">Node.js</span>
-                        <span class="skill-pill stagger-6">JavaScript</span>
-                        <span class="skill-pill stagger-1">PHP</span>
-                        <span class="skill-pill stagger-2">Git</span>
-                        <span class="skill-pill stagger-3">Jira</span>
+                        <h4
+                            style="margin-bottom: 1.5rem; color: var(--accent-indigo); font-family: 'JetBrains Mono'; font-size: 0.9rem; border-bottom: 2px solid var(--border-light); padding-bottom: 0.5rem;">
+                            <i class="fas fa-code-branch"></i> CI/CD & GITOPS
+                        </h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <div class="skill-pill-pro"><span>GitLab CI / GHA</span> <span
+                                    class="status-ok">NOMINAL</span></div>
+                            <div class="skill-pill-pro"><span>ArgoCD / Flux</span> <span class="status-ok">SYNCED</span>
+                            </div>
+                            <div class="skill-pill-pro"><span>Jenkins Pipelines</span> <span
+                                    class="status-ok">STABLE</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4
+                            style="margin-bottom: 1.5rem; color: var(--accent-cyan); font-family: 'JetBrains Mono'; font-size: 0.9rem; border-bottom: 2px solid var(--border-light); padding-bottom: 0.5rem;">
+                            <i class="fas fa-cogs"></i> AUTOMATION & IAC
+                        </h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <div class="skill-pill-pro"><span>Terraform (IaC)</span> <span
+                                    class="status-ok">NOMINAL</span></div>
+                            <div class="skill-pill-pro"><span>Ansible (Config)</span> <span
+                                    class="status-ok">NOMINAL</span></div>
+                            <div class="skill-pill-pro"><span>Python / Bash</span> <span
+                                    class="status-ok">LEVEL:MAX</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4
+                            style="margin-bottom: 1.5rem; color: var(--success); font-family: 'JetBrains Mono'; font-size: 0.9rem; border-bottom: 2px solid var(--border-light); padding-bottom: 0.5rem;">
+                            <i class="fas fa-microscope"></i> OBSERVABILITY & SEC
+                        </h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                            <div class="skill-pill-pro"><span>Prometheus/Grafana</span> <span
+                                    class="status-ok">ACTIVE</span></div>
+                            <div class="skill-pill-pro"><span>ELK Stack</span> <span class="status-ok">ACTIVE</span>
+                            </div>
+                            <div class="skill-pill-pro"><span>Trivy / Velero</span> <span class="status-ok">READY</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div>
-                <div class="edu-card">
-                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-                    <div>
-                        <h4 style="font-size: 1rem;">Master’s in DevOps & Cloud</h4>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">IU International
-                            University (Germany)</p>
+                <div class="section-title" style="margin-bottom: 1.5rem; color: var(--accent-blue);">📡 CREDENTIALS
+                    [VERIFIED]</div>
+                <div class="edu-card-pro">
+                    <div class="edu-badge">MASTER</div>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+                        [M.Sc] DEPLOYED: 2023-2025
                     </div>
+                    <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 700;">
+                        DevOps & Cloud Engineering
+                    </h4>
+                    <p
+                        style="font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-map-marker-alt"></i> IU International University · Germany
+                    </p>
                 </div>
-                <div class="edu-card">
-                    <div class="edu-icon"><i class="fas fa-university"></i></div>
-                    <div>
-                        <h4 style="font-size: 1rem;">Bachelor’s in CS</h4>
-                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">ISIM Monastir
-                            (Tunisia)</p>
+                <div class="edu-card-pro">
+                    <div class="edu-badge">BACHELOR</div>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+                        [B.Sc] DEPLOYED: 2017-2020
                     </div>
+                    <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 700;">
+                        Computer Science
+                    </h4>
+                    <p
+                        style="font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-map-marker-alt"></i> ISIM Monastir · Tunisia
+                    </p>
                 </div>
                 <div class="lang-card">
                     <div class="lang-row">
@@ -2064,9 +2582,15 @@
                         </div>
                     </div>
                     <div class="lang-row">
-                        <div class="lang-info"><span>English</span> <span>Proficient</span></div>
+                        <div class="lang-info"><span>English</span> <span>Professional</span></div>
                         <div class="lang-bar">
-                            <div class="lang-fill" style="width: 85%;"></div>
+                            <div class="lang-fill" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="lang-row">
+                        <div class="lang-info"><span>French</span> <span>Intermediate</span></div>
+                        <div class="lang-bar">
+                            <div class="lang-fill" style="width: 60%;"></div>
                         </div>
                     </div>
                 </div>
@@ -2124,11 +2648,6 @@
                 <div class="form-group">
                     <label>COORDINATES (SENDER EMAIL)</label>
                     <input type="email" name="_replyto" id="contactEmail" placeholder="hq@yourproject.com" required>
-                </div>
-                <div class="form-group">
-                    <label>TRANSMISSION (MESSAGE body)</label>
-                    <textarea name="message" id="contactMessage" rows="4"
-                        placeholder="Brief your mission requirements..." required></textarea>
                 </div>
                 <input type="hidden" name="_subject" value="New Portfolio Mission Brief!">
                 <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
@@ -2264,7 +2783,6 @@
                 const orig = btn.innerHTML;
                 const name = document.getElementById('contactName').value;
                 const email = document.getElementById('contactEmail').value;
-                const messageContent = document.getElementById('contactMessage').value;
 
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENCRYPTING SIGNAL...';
                 btn.disabled = true;
@@ -2298,8 +2816,8 @@
                         }, 3000);
                     } else { throw new Error(); }
                 } catch (err) {
-                    // FALLBACK: Detailed Mailto
-                    const mailtoBody = `From: ${name} (${email})%0D%0A%0D%0AMessage:%0D%0A${encodeURIComponent(messageContent)}`;
+                    // FALLBACK: Simple Mailto
+                    const mailtoBody = `From: ${name} (${email})%0D%0A%0D%0AInquiry from Portfolio.`;
                     window.location.href = `mailto:mehrez.sarra@yahoo.com?subject=New Mission Brief from ${name}&body=${mailtoBody}`;
 
                     overlay.classList.remove('active');
@@ -2465,6 +2983,9 @@
             });
         });
     </script>
+
+    <!-- Live Alert System -->
+    <script src="./scripts/live-alerts.js"></script>
 </body>
 
 </html>

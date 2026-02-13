@@ -5,9 +5,9 @@
   "main": "src/index.html",
   "scripts": {
     "dev": "node scripts/mock-prometheus.js & npx serve src -l 8080",
-    "build": "node scripts/generate-feed.js && npm run copy-assets",
+    "build": "npm run copy-assets",
     "copy-assets": "node -e \"require('fs-extra').copySync('src', 'dist')\"",
-    "generate-feed": "node scripts/generate-feed.js",
+    "generate-feed": "echo 'No feed generator needed'",
     "lint:js": "eslint src/scripts/**/*.js",
     "lint:css": "stylelint src/styles/**/*.css",
     "lint:html": "htmlhint src/**/*.html",
