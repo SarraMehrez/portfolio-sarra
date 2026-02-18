@@ -10,6 +10,8 @@
         rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js for 3D Model -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -421,7 +423,8 @@
         /* Projects Section Styles */
         .projects {
             padding: 5rem 0;
-            background: var(--bg-primary);
+            background: rgba(10, 22, 40, 0.6);
+            backdrop-filter: blur(8px);
         }
 
         .project-card {
@@ -989,7 +992,7 @@
             height: 250px;
             top: 10%;
             left: 40%;
-            background: rgba(0, 129, 207, 0.1);
+            background: rgba(0, 129, 207, 0.02);
             animation-delay: -5s;
         }
 
@@ -1154,6 +1157,78 @@
             opacity: 1;
         }
 
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .three-overlay-home {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .three-overlay-home h2 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(0, 129, 207, 0.05);
+            text-transform: uppercase;
+            letter-spacing: 0.8em;
+            margin: 0;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .three-caption-home {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(15, 31, 54, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            z-index: 10;
+            animation: fadeInLeft 1s ease-out backwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .three-caption-home h4 {
+            color: var(--accent-blue);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
+            text-transform: uppercase;
+        }
+
+        .three-caption-home p {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
         body {
             font-family: 'Space Grotesk', sans-serif;
             background: var(--bg-primary);
@@ -1268,6 +1343,7 @@
             align-items: center;
             padding: 120px 0 60px;
             position: relative;
+            background: transparent;
         }
 
         .container {
@@ -1562,6 +1638,8 @@
         /* Stats Section */
         .stats {
             padding: 4rem 0;
+            background: rgba(10, 22, 40, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         .stats-grid {
@@ -1610,7 +1688,8 @@
         /* Pipeline Section */
         .pipeline {
             padding: 5rem 0;
-            background: #fdfdfd;
+            background: rgba(10, 22, 40, 0.7);
+            backdrop-filter: blur(5px);
         }
 
         .section-header {
@@ -1736,6 +1815,8 @@
         /* Activity Log Section */
         .activity {
             padding: 5rem 0;
+            background: rgba(10, 22, 40, 0.4);
+            backdrop-filter: blur(4px);
         }
 
         .activity-container {
@@ -1935,7 +2016,7 @@
         /* Education & Skills Grid */
         .details-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr;
+            grid-template-columns: 1fr;
             gap: 2rem;
             margin-bottom: 4rem;
         }
@@ -2018,7 +2099,8 @@
 
         /* Footer */
         footer {
-            background: var(--bg-primary);
+            background: rgba(10, 22, 40, 0.8);
+            backdrop-filter: blur(10px);
             padding: 4rem 0;
             text-align: center;
             color: var(--text-muted);
@@ -2072,6 +2154,11 @@
 </head>
 
 <body>
+    <div id="three-container"></div>
+    <div class="three-overlay-home">
+        <h2>INFRASTRUCTURE</h2>
+    </div>
+
     <div class="mojo-bubbles">
         <div class="bubble"></div>
         <div class="bubble"></div>
@@ -2118,14 +2205,14 @@
                         </div>
                         <div class="profile-info">
                             <h1>SARRA MEHREZ</h1>
-                            <p>DevOps Architect & Automation Specialist</p>
+                            <p>DevOps & Cloud Architect | Automation Specialist</p>
                         </div>
                     </div>
 
                     <div class="tagline">
                         <i class="fas fa-terminal"></i>
-                        <span>Automating Resilience · Disaster Recovery · GitOps</span>
-                        <i class="fas fa-shield-virus"></i>
+                        <span>Cloud Architecture · L1/L2 Support · System & DB Admin · Zero-Downtime</span>
+                        <i class="fas fa-headset"></i>
                     </div>
                     <div
                         style="margin-bottom: 2rem; font-weight: 500; font-family: 'JetBrains Mono'; color: var(--accent-blue);">
@@ -2144,9 +2231,11 @@
                     </div>
 
                     <p class="hero-description">
-                        I build automated bastions. Specialized in end-to-end CI/CD automation, complex disaster
-                        recovery strategies, and self-healing Kubernetes infrastructure. Focused on ensuring 99.99%
-                        availability through code.
+                        Senior <strong>DevOps & Cloud Architect</strong> with a solid foundation in
+                        <strong>IT Support (L1/L2)</strong> and <strong>System & Database Administration</strong>.
+                        Dedicated to achieving maximum <strong>Customer Satisfaction</strong> by maintaining
+                        <strong>High Availability</strong> and eliminating <strong>System Downtime</strong>
+                        through intelligent automation and resilient architecture.
                     </p>
 
                     <div class="cta-buttons">
@@ -2188,6 +2277,8 @@
                 </div>
             </div>
         </div>
+    </section>
+
     </section>
 
     <!-- Pipeline Section -->
@@ -2491,12 +2582,12 @@
                 <div class="achievements-side">
                     <div class="section-title" style="margin-bottom: 1.5rem;">CORE ACHIEVEMENTS</div>
                     <div class="achievement-item">
-                        <div class="achievement-number" data-target="47">0</div>
-                        <div class="achievement-label">Vulnerabilities Cleansed</div>
+                        <div class="achievement-number" data-target="99">0</div>
+                        <div class="achievement-label">SLA / Satisfaction %</div>
                     </div>
                     <div class="achievement-item">
-                        <div class="achievement-number" data-target="23">0</div>
-                        <div class="achievement-label">Broken Builds Restored</div>
+                        <div class="achievement-number" data-target="1500">0</div>
+                        <div class="achievement-label">DB Queries Optimized</div>
                     </div>
                 </div>
             </div>
@@ -2597,9 +2688,21 @@
                     <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 700;">
                         Computer Science
                     </h4>
-                    <p
-                        style="font-size: 0.85rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem;">
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">
                         <i class="fas fa-map-marker-alt"></i> ISIM Monastir · Tunisia
+                    </p>
+                </div>
+                <div class="edu-card-pro">
+                    <div class="edu-badge">CERTIFIED</div>
+                    <div
+                        style="font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem; letter-spacing: 0.05em;">
+                        [XP] SYSTEMS & SUPPORT
+                    </div>
+                    <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 700;">
+                        IT Support L1/L2 & SysAdmin
+                    </h4>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                        Incident resolution, database management, and mission-critical support.
                     </p>
                 </div>
                 <div class="lang-card">
@@ -2622,8 +2725,8 @@
                         </div>
                     </div>
                 </div>
+
             </div>
-        </div>
     </section>
 
     <!-- Footer -->
@@ -2641,18 +2744,6 @@
         </div>
     </footer>
 
-    <!-- Peeking Cat Mascot -->
-    <div class="peeking-cat" id="cat">
-        <!-- Using a placeholder system to restore the cat visually -->
-        <svg viewBox="0 0 100 80" style="width:100%; height:auto;">
-            <path d="M20,60 Q20,20 50,20 T80,60" fill="#FFAD60" />
-            <path d="M30,25 L20,5 L40,20 Z" fill="#FFAD60" />
-            <path d="M70,25 L80,5 L60,20 Z" fill="#FFAD60" />
-            <circle cx="40" cy="45" r="4" fill="#333" />
-            <circle cx="60" cy="45" r="4" fill="#333" />
-            <path d="M45,55 Q50,60 55,55" fill="none" stroke="#333" stroke-width="2" />
-        </svg>
-    </div>
 
     <!-- Contact Modal -->
     <div class="modal-overlay" id="contactOverlay">
@@ -2661,11 +2752,23 @@
             <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 2rem;">Feel free to reach out or
                 send project queries below.</p>
 
-            <div id="submitStatus" class="submit-status">
-                <i class="fas fa-check-circle"></i> SIGNAL ENCRYPTED & SENT!
-                <p style="font-size: 0.7rem; margin-top: 0.5rem; opacity: 0.8;">Important: Check your email
-                    (mehrez.sarra@yahoo.com) for a Formspree activation link if this is your first time using this ID.
+            <div id="submitStatus" class="submit-status"
+                style="background: rgba(0, 210, 255, 0.1); border: 1px solid var(--accent-blue); padding: 1.5rem; border-radius: 12px; display: none;">
+                <div style="font-size: 1.2rem; font-weight: 800; color: var(--accent-blue); margin-bottom: 0.5rem;">
+                    <i class="fas fa-check-circle"></i> SIGNAL TRANSMITTED!
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-primary); margin-bottom: 1rem;">
+                    If you don't receive an email within 2 minutes:
                 </p>
+                <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                    <a href="mailto:mehrez.sarra@yahoo.com" class="btn btn-secondary"
+                        style="font-size: 0.75rem; background: var(--accent-blue); color: white;">
+                        <i class="fas fa-paper-plane"></i> OPEN DIRECT MAIL (BACKUP)
+                    </a>
+                    <p style="font-size: 0.7rem; color: var(--text-muted); font-style: italic;">
+                        Check your SPAM folder for an activation link from Formspree if this is your first time.
+                    </p>
+                </div>
             </div>
 
             <form id="contactForm" action="https://formspree.io/f/xanyqvbp" method="POST">
@@ -2675,12 +2778,28 @@
                 </div>
                 <div class="form-group">
                     <label>COORDINATES (SENDER EMAIL)</label>
-                    <input type="email" name="_replyto" id="contactEmail" placeholder="hq@yourproject.com" required>
+                    <input type="email" name="email" id="contactEmail" placeholder="hq@yourproject.com" required>
                 </div>
-                <input type="hidden" name="_subject" value="New Portfolio Mission Brief!">
-                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                    <i class="fas fa-satellite-dish"></i> SEND SIGNAL
+                <!-- Adding hidden field for better Formspree mapping -->
+                <input type="hidden" name="_replyto" id="contactReplyTo">
+                <div class="form-group">
+                    <label>MISSION OBJECTIVE (SUBJECT)</label>
+                    <input type="text" name="_subject" id="contactSubject" placeholder="Collaboration / Job Opportunity"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label>TRANSMISSION DETAILS (MESSAGE)</label>
+                    <textarea name="message" id="contactMessage" placeholder="Decrypted mission brief..." required
+                        style="width: 100%; min-height: 100px; background: rgba(10, 22, 40, 0.4); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-primary); padding: 0.8rem; font-family: 'JetBrains Mono'; margin-top: 0.5rem;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"
+                    style="width: 100%; justify-content: center; margin-bottom: 1rem;">
+                    <i class="fas fa-satellite-dish"></i> SEND SIGNAL (EMAIL)
                 </button>
+                <a href="https://wa.me/21695276550" target="_blank" class="btn btn-secondary"
+                    style="width: 100%; justify-content: center; background: #25D366; color: white; border: none;">
+                    <i class="fab fa-whatsapp"></i> REACH ON WHATSAPP (INSTANT)
+                </a>
             </form>
 
             <div
@@ -2811,6 +2930,12 @@
                 const orig = btn.innerHTML;
                 const name = document.getElementById('contactName').value;
                 const email = document.getElementById('contactEmail').value;
+                const subject = document.getElementById('contactSubject').value;
+                const message = document.getElementById('contactMessage').value;
+
+                // Set hidden reply-to for Formspree
+                const replyTo = document.getElementById('contactReplyTo');
+                if (replyTo) replyTo.value = email;
 
                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENCRYPTING SIGNAL...';
                 btn.disabled = true;
@@ -2826,14 +2951,9 @@
 
                     if (response.ok) {
                         statusBox.style.display = 'block';
-                        statusBox.innerHTML = '<i class="fas fa-check-circle"></i> Signal Received! <br><small>Confirm the activation email if this is your first test.</small>';
+                        contactForm.style.display = 'none'; // Hide form after success
                         btn.innerHTML = '<i class="fas fa-check"></i> SIGNAL SENT';
 
-                        // Interaction: Make cat jump
-                        if (cat) {
-                            cat.style.bottom = "50px";
-                            setTimeout(() => cat.style.bottom = "", 1000);
-                        }
 
                         setTimeout(() => {
                             overlay.classList.remove('active');
@@ -2845,8 +2965,8 @@
                     } else { throw new Error(); }
                 } catch (err) {
                     // FALLBACK: Simple Mailto
-                    const mailtoBody = `From: ${name} (${email})%0D%0A%0D%0AInquiry from Portfolio.`;
-                    window.location.href = `mailto:mehrez.sarra@yahoo.com?subject=New Mission Brief from ${name}&body=${mailtoBody}`;
+                    const mailtoBody = `Mission from: ${name} (${email})%0D%0A%0D%0A${message}`;
+                    window.location.href = `mailto:mehrez.sarra@yahoo.com?subject=${subject}&body=${mailtoBody}`;
 
                     overlay.classList.remove('active');
                     btn.innerHTML = orig;
@@ -3014,6 +3134,7 @@
 
     <!-- Live Alert System -->
     <script src="./scripts/live-alerts.js"></script>
+    <script src="./scripts/three-scene.js"></script>
 </body>
 
 </html>
